@@ -1,0 +1,9 @@
+{
+  "name": "bloop-mono",
+  "private": true,
+  "workspaces": [
+    "bloop-utils",
+    "bloop-server",
+    "bloop-web"
+  ]
+}
