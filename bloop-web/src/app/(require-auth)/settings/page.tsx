@@ -6,7 +6,6 @@ import {
   FormDescription,
   FormField,
   FormItem,
-  FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
@@ -21,6 +20,7 @@ import { editProfileSchema } from "bloop-utils/validation";
 import { Settings } from "lucide-react";
 import { FieldErrors, useForm } from "react-hook-form";
 import { toast } from "sonner";
+import { Label } from "@/components/ui/label";
 
 const SettingsPage = () => {
   const auth = useAuth();
@@ -85,7 +85,7 @@ const SettingsPage = () => {
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <Label htmlFor={field.name}>Username</Label>
                   <FormControl>
                     <Input placeholder="john.doe" {...field} />
                   </FormControl>
@@ -101,7 +101,7 @@ const SettingsPage = () => {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <Label htmlFor={field.name}>Email</Label>
                   <Input
                     placeholder="john.doe@gmail.com"
                     type="email"
@@ -118,7 +118,7 @@ const SettingsPage = () => {
               name="currentPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Current Password</FormLabel>
+                  <Label htmlFor={field.name}>Current Password</Label>
                   <Input placeholder="**********" type="password" {...field} />
                   <FormDescription>
                     This is your current password.
@@ -131,7 +131,7 @@ const SettingsPage = () => {
               name="newPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>New Password</FormLabel>
+                  <Label htmlFor={field.name}>New Password</Label>
                   <Input placeholder="**********" type="password" {...field} />
                   <FormDescription>
                     This is your new password. It must be at least 8 characters
