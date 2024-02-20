@@ -90,8 +90,7 @@ const SettingsPage = () => {
                     <Input placeholder="john.doe" {...field} />
                   </FormControl>
                   <FormDescription>
-                    This is your public display name. It can be your real name
-                    or a pseudonym.
+                    This is your public display name.
                   </FormDescription>
                 </FormItem>
               )}
@@ -121,7 +120,7 @@ const SettingsPage = () => {
                   <Label htmlFor={field.name}>Current Password</Label>
                   <Input placeholder="**********" type="password" {...field} />
                   <FormDescription>
-                    This is your current password.
+                    This is your current account password.
                   </FormDescription>
                 </FormItem>
               )}
