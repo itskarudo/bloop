@@ -16,7 +16,8 @@ const UserEntry: React.FC<Props> = ({ user, listId }) => {
     <div key={user.id} className="flex items-center">
       <Avatar>
         <AvatarImage
-          src="https://github.com/itskarudo.png"
+          src={user?.image ?? "https://github.com/itskarudo.png"}
+          className="object-cover"
           alt={`@${user.username}`}
         />
         <AvatarFallback>

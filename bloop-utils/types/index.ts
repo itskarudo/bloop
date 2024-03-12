@@ -14,6 +14,7 @@ import {
   type WatchedEpisode,
   type NewWatchedEpisode,
 } from "bloop-server/src/db/schema";
+import { uploadRouter } from "bloop-server/src/utils/utRouter";
 
 export type ServerSuccess<T = any> = {
   ok: true;
@@ -95,3 +96,4 @@ export type TMDBTVShow = {
 };
 
 export type TMDBAnime = TMDBTVShow;
+export type BloopFileRouter = typeof uploadRouter;

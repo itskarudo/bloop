@@ -21,6 +21,7 @@ import { Settings } from "lucide-react";
 import { FieldErrors, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { Label } from "@/components/ui/label";
+import UploadProfilePic from "@/components/misc/settings/UploadProfilePic";
 
 const SettingsPage = () => {
   const auth = useAuth();
@@ -74,7 +75,7 @@ const SettingsPage = () => {
         </h1>
       </div>
       <Separator className="my-4" />
-      <div className="lg:w-1/2">
+      <div className="flex flex-col-reverse lg:grid grid-cols-2 gap-8">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit, onError)}
@@ -144,6 +145,7 @@ const SettingsPage = () => {
             </Button>
           </form>
         </Form>
+        <UploadProfilePic />
       </div>
     </div>
   );

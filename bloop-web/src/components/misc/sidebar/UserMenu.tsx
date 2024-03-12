@@ -33,7 +33,10 @@ const UserMenu = () => {
           >
             <div className="w-full flex items-center">
               <Avatar className="hover:cursor-pointer h-9 w-9 shrink-0">
-                <AvatarImage src="https://github.com/itskarudo.png" />
+                <AvatarImage
+                  src={user?.image ?? "https://github.com/itskarudo.png"}
+                  className="object-cover"
+                />
                 <AvatarFallback>
                   {user?.username.slice(0, 2).toUpperCase()}
                 </AvatarFallback>

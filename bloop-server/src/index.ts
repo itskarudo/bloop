@@ -5,6 +5,8 @@ import listsRouter from "./routes/lists";
 import mediaRouter from "./routes/media";
 import invitesRouter from "./routes/invites";
 import profileRouter from "./routes/profile";
+import { createRouteHandler } from "uploadthing/server";
+import { uploadRouter } from "./utils/utRouter";
 
 const app = new Hono();
 app.use(
@@ -14,6 +16,16 @@ app.use(
     credentials: true,
   })
 );
+
+const { GET, POST } = createRouteHandler({
+  router: uploadRouter,
+});
+
+const ut = new Hono()
+  .get("/", (c) => GET(c.req.raw))
+  .post("/", (c) => POST(c.req.raw));
+
+app.route("/upload", ut);
 
 app.route("/auth", authRouter);
 app.route("/profile", profileRouter);
