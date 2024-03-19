@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import SeasonsView from "@/components/misc/media-page/SeasonsView";
 import { useGetAnimeDetails } from "@/hooks/api/media/useGetAnimeDetails";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, Heart, Popcorn, Tv } from "lucide-react";
 
 interface Props {
   params: {
@@ -32,14 +32,36 @@ const AnimePage: React.FC<Props> = ({ params: { listId, animeId } }) => {
       ></div>
       <div className="relative pt-[420px] pb-20">
         <div className="flex flex-col md:flex-row items-center md:items-start gap-12">
-          <div className="rounded-md overflow-hidden static md:sticky top-6 shadow-md">
-            <Image
-              src={`https://image.tmdb.org/t/p/w500${animeData.poster_path}`}
-              alt={animeData.name}
-              width={230}
-              height={345}
-              className="h-auto w-auto object-cover"
-            />
+          <div className="static md:sticky top-6">
+            <div className="rounded-md overflow-hidden shadow-md">
+              <Image
+                src={`https://image.tmdb.org/t/p/w500${animeData.poster_path}`}
+                alt={animeData.title}
+                width={230}
+                height={345}
+                className="h-auto w-auto object-cover"
+              />
+            </div>
+            <div className="grid grid-cols-3 mt-2">
+              <div className="flex flex-col items-center gap-1 p-3">
+                <Heart />
+                <p className="text-xs font-medium leading-none">
+                  {Math.round(animeData.vote_average * 10)}%
+                </p>
+              </div>
+              <div className="flex flex-col items-center gap-1 p-3">
+                <Popcorn />
+                <p className="text-xs font-medium leading-none">
+                  {animeData.popularity}
+                </p>
+              </div>
+              <div className="flex flex-col items-center gap-1 p-3">
+                <Tv />
+                <p className="text-xs font-medium leading-none">
+                  {animeData.number_of_episodes} eps
+                </p>
+              </div>
+            </div>
           </div>
           <div className="w-2/3 lg:w-1/2 space-y-6 text-center md:text-left">
             <div className="flex items-center gap-4">

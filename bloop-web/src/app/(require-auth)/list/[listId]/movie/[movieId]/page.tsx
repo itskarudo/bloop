@@ -4,7 +4,8 @@ import { useGetMovieDetails } from "@/hooks/api/media/useGetMovieDetails";
 import { redirect } from "next/navigation";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle2 } from "lucide-react";
+import { CheckCircle2, CircleDollarSign, Heart, Popcorn } from "lucide-react";
+import { convertToInternationalCurrencySystem } from "bloop-utils/formatters";
 
 interface Props {
   params: {
@@ -32,14 +33,36 @@ const MoviePage: React.FC<Props> = ({ params: { listId, movieId } }) => {
       ></div>
       <div className="relative pt-[420px] pb-20">
         <div className="flex flex-col md:flex-row items-center md:items-start gap-12">
-          <div className="rounded-md overflow-hidden relative">
-            <Image
-              src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`}
-              alt={movieData.title}
-              width={230}
-              height={345}
-              className="h-auto w-auto object-cover"
-            />
+          <div className="static md:sticky top-6">
+            <div className="rounded-md overflow-hidden shadow-md">
+              <Image
+                src={`https://image.tmdb.org/t/p/w500${movieData.poster_path}`}
+                alt={movieData.title}
+                width={230}
+                height={345}
+                className="h-auto w-auto object-cover"
+              />
+            </div>
+            <div className="grid grid-cols-3 mt-2">
+              <div className="flex flex-col items-center gap-1 p-3">
+                <Heart />
+                <p className="text-xs font-medium leading-none">
+                  {Math.round(movieData.vote_average * 10)}%
+                </p>
+              </div>
+              <div className="flex flex-col items-center gap-1 p-3">
+                <Popcorn />
+                <p className="text-xs font-medium leading-none">
+                  {movieData.popularity}
+                </p>
+              </div>
+              <div className="flex flex-col items-center gap-1 p-3">
+                <CircleDollarSign />
+                <p className="text-xs font-medium leading-none">
+                  ${convertToInternationalCurrencySystem(movieData.revenue)}
+                </p>
+              </div>
+            </div>
           </div>
           <div className="w-2/3 lg:w-1/2 space-y-6 text-center md:text-left">
             <div className="flex items-center gap-4">
