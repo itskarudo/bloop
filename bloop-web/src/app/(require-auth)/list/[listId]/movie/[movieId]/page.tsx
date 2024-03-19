@@ -21,7 +21,7 @@ const MoviePage: React.FC<Props> = ({ params: { listId, movieId } }) => {
 
   if (isPending) return null;
 
-  const { movieData, watched } = data.data;
+  const { movieData, movieCredits, watched } = data.data;
 
   return (
     <div className="relative min-h-screen flex flex-col px-4 lg:px-32">
@@ -82,6 +82,36 @@ const MoviePage: React.FC<Props> = ({ params: { listId, movieId } }) => {
               {movieData.genres.map((genre: any) => (
                 <Badge key={genre.id}>{genre.name}</Badge>
               ))}
+            </div>
+            <div className="space-y-6 pt-4">
+              <h3 className="scroll-m-20 text-3xl font-semibold tracking-tight">
+                Cast
+              </h3>
+              <div className="grid grid-cols-3 gap-4">
+                {movieCredits.cast
+                  .filter((cast: any) => cast.profile_path)
+                  .map((cast: any) => (
+                    <div className="rounded overflow-hidden shadow flex">
+                      <div>
+                        <Image
+                          src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
+                          alt={cast.name}
+                          width={50}
+                          height={345}
+                          className="h-full w-auto object-cover"
+                        />
+                      </div>
+                      <div className="space-y-2 p-4">
+                        <p className="text-sm font-medium leading-none">
+                          {cast.name}
+                        </p>
+                        <p className="text-xs font-medium text-muted-foreground">
+                          {cast.character}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+              </div>
             </div>
           </div>
         </div>

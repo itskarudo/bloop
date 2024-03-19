@@ -122,21 +122,25 @@ mediaRouter.get(
       return c.json({ ok: false, errors: [MediaErrorCodes.MEDIA_NOT_FOUND] });
     }
 
-    const ENDPOINT = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.TMDB_API_KEY}`;
+    const [movieData, movieCredits] = await Promise.all([
+      fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.TMDB_API_KEY}`
+      ).then((res) => res.json()),
+      fetch(
+        `https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${process.env.TMDB_API_KEY}`
+      ).then((res) => res.json()),
+    ]);
 
-    const result = await fetch(ENDPOINT);
-
-    if (result.status === 404) {
+    if (movieData.status === 404) {
       c.status(404);
       return c.json({ ok: false, errors: [MediaErrorCodes.MEDIA_NOT_FOUND] });
     }
-
-    const movieData = await result.json();
 
     return c.json({
       ok: true,
       data: {
         movieData,
+        movieCredits,
         watched: relation.watched,
       },
     });
